@@ -10,6 +10,7 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
 
     static  String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    static  String NAME_PATTERN = "^[A-Z][a-zA-Z'-]{1,}$";
     public static void main(String[] args) {
         run();
     }
@@ -45,7 +46,7 @@ public class Main {
 
         if (isEmailValid(email)) {
             Client client = buildClient(email);
-            System.out.println("New client: " + client.name + " " + client.lastName + " (" + client.email + ")");
+            System.out.println("New client: " + client.firstName + " " + client.lastName + " (" + client.email + ")");
         } else {
             System.out.println("Provided email is invalid");
         }
@@ -56,12 +57,30 @@ public class Main {
         client.email = email;
 
         System.out.print("First name: ");
-        client.name = scanner.nextLine();
+        String firstName = scanner.nextLine();
+        while (!isNameValid(firstName)) {
+            System.out.print("The name must contain at least 2 letters. The first letter must be in upper case." +
+                    "\nPlease try again: ");
+            firstName = scanner.nextLine();
+            client.firstName = firstName;
+        }
 
         System.out.print("Last name: ");
-        client.lastName = scanner.nextLine();
+        String lastName = scanner.nextLine();
+        while (!isNameValid(lastName)) {
+            System.out.print("The last name must contain at least 2 letters. The first letter must be in upper case." +
+                    "\nPlease try again: ");
+            lastName = scanner.nextLine();
+            client.lastName = lastName;
+        }
 
         return  client;
+    }
+
+    private static boolean isNameValid(String name) {
+        Pattern pattern = Pattern.compile(NAME_PATTERN);
+        Matcher matcher = pattern.matcher(name);
+        return matcher.matches();
     }
 
     private static boolean isEmailValid(String email) {
