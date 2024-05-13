@@ -13,7 +13,6 @@ public class PetService {
         Pet pet = null;
         System.out.println("Type (dog / cat): ");
         String type = Main.SCANNER.nextLine();
-        pet.setType(type);
 
         if (DOG_TYPE.equals(type) || CAT_TYPE.equals(type)) {
             pet = buildPet(type);
@@ -27,9 +26,6 @@ public class PetService {
         Pet pet = type.equals(DOG_TYPE) ? new Dog() : new Cat();
         pet.setType(type);
 
-        System.out.print("Age: ");
-        pet.setAge(Main.SCANNER.nextLine());
-
         System.out.print("Name: ");
         pet.setName(Main.SCANNER.nextLine());
 
@@ -40,6 +36,11 @@ public class PetService {
             System.out.print("Size (XS / S / M / L / XL): ");
             ((Dog)pet).setSize(Main.SCANNER.nextLine());
         }
+
+        //in future may be a problem with Scanner if you want use .nextLine() after calling .nextInt()
+        System.out.print("Age: ");
+        pet.setAge(Main.SCANNER.nextInt());
+
         return pet;
     }
 }
