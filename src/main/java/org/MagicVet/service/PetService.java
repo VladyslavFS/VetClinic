@@ -42,6 +42,21 @@ public class PetService {
         System.out.print("Age: ");
         pet.setAge(Main.SCANNER.nextInt());
 
+        System.out.print("State of health (0-4): " +
+                "\n1-Sick" +
+                "\n2-Injured" +
+                "\n3-Recovering" +
+                "\n4-Healthy" +
+                "\nEnter 0 if health status is unknown: ");
+        int healthStateValue = Main.SCANNER.nextInt();
+        Pet.HealthState healthState = Pet.HealthState.fromValue(healthStateValue);
+        if (healthState != null) {
+            pet.setHealthState(healthState);
+        } else {
+            System.out.println("Invalid input. Please enter a number between 0 and 4.");
+        }
+
+
         return pet;
     }
 }

@@ -3,6 +3,7 @@ package org.MagicVet.model;
 import java.util.Objects;
 
 public abstract class Pet {
+    private HealthState healthState;
     private String type;
     private String sex;
     private int age;
@@ -17,6 +18,7 @@ public abstract class Pet {
                 ", age='" + age + '\'' +
                 ", name='" + name + '\'' +
                 ", ownerName='" + ownerName + '\'' +
+                ", state of health='" + healthState + '\'' +
                 "\n\t}";
     }
 
@@ -35,6 +37,14 @@ public abstract class Pet {
     @Override
     public int hashCode() {
         return Objects.hash(type, sex, age, name, ownerName);
+    }
+
+    public HealthState getHealthState() {
+        return healthState;
+    }
+
+    public void setHealthState(HealthState healthState) {
+        this.healthState = healthState;
     }
 
     public String getType() {
@@ -75,5 +85,28 @@ public abstract class Pet {
 
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
+    }
+
+    public enum HealthState {
+        HEALTHY(4), RECOVERING(3), INJURED(2), SICK(1), UNKNOWN(0);
+
+        private final int value;
+
+        HealthState(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return this.value;
+        }
+
+        public static HealthState fromValue(int value) {
+            for (HealthState state : HealthState.values()) {
+                if (state.value == value) {
+                    return state;
+                }
+            }
+            return null;
+        }
     }
 }
