@@ -1,24 +1,29 @@
 package org.MagicVet.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public abstract class Pet {
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
     private HealthState healthState;
     private String type;
     private String sex;
     private int age;
     private String name;
     private String ownerName;
+    private final LocalDateTime registrationDate = LocalDateTime.now();
 
     @Override
     public String toString() {
         return "Pet {" +
-                "\n\t\ttype='" + type + '\'' +
-                ", sex='" + sex + '\'' +
-                ", age='" + age + '\'' +
-                ", name='" + name + '\'' +
-                ", ownerName='" + ownerName + '\'' +
-                ", state of health='" + healthState + '\'' +
+                "\n\t\ttype = " + type +
+                ", sex = " + sex +
+                ", age = " + age +
+                ", name = " + name +
+                ", ownerName = " + ownerName +
+                ", state of health = " + healthState +
+                ", registration time = " + registrationDate.format(FORMATTER) +
                 "\n\t}";
     }
 
