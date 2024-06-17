@@ -25,7 +25,7 @@ public class ApplicationRunner {
     private void registerPets(Client client) {
         boolean continueAddPets = true;
         while(continueAddPets) {
-            addPet(client);
+            addPets(client);
             System.out.print("Do you want to add more pets? (y/n): ");
             String answer = Main.SCANNER.nextLine();
             if (answer.equalsIgnoreCase("n")) {
@@ -34,18 +34,15 @@ public class ApplicationRunner {
         }
     }
 
-    private void addPet(Client client) {
-        System.out.println("Add new pet? (yes / no): ");
-        if (Main.SCANNER.nextLine().equals("yes")) {
-            System.out.println("Adding a new pet.");
+    private void addPets(Client client) {
+        System.out.println("Adding a new pet.");
 
-            Pet pet = petService.registerNewPet();
+        Pet pet = petService.registerNewPet();
 
-            if (pet != null) {
-                client.addPet(pet);
-                pet.setOwnerName(client.getFirstName() + " " + client.getLastName());
-                System.out.println("Pet has been added");
-            }
+        if (pet != null) {
+            client.addPet(pet);
+            pet.setOwnerName(client.getFirstName() + " " + client.getLastName());
+            System.out.println("Pet has been added");
         }
     }
 }

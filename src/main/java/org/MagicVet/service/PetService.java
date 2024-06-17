@@ -34,7 +34,7 @@ public class PetService {
 
         if (type.equals(DOG_TYPE)) {
             System.out.print("Size (XS / S / M / L / XL): ");
-            String size = Main.SCANNER.nextLine();
+            String size = Main.SCANNER.nextLine().toUpperCase();
             ((Dog)pet).setSize(Dog.Size.valueOf(size));
         }
 
@@ -50,12 +50,12 @@ public class PetService {
                 "\nEnter 0 if health status is unknown: ");
         int healthStateValue = Main.SCANNER.nextInt();
         Pet.HealthState healthState = Pet.HealthState.fromValue(healthStateValue);
+        Main.SCANNER.nextLine();
         if (healthState != null) {
             pet.setHealthState(healthState);
         } else {
             System.out.println("Invalid input. Please enter a number between 0 and 4.");
         }
-
 
         return pet;
     }
