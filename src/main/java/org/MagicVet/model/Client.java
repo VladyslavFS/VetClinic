@@ -10,11 +10,12 @@ import java.util.Objects;
 public class Client {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm", Locale.ENGLISH);
+    private final LocalDateTime registrationDate = LocalDateTime.now();
     private String firstName;
     private String lastName;
     private String email;
     private List<Pet> pets = new ArrayList<>();
-    private final LocalDateTime registrationDate = LocalDateTime.now();
+    private Location location;
 
     @Override
     public String toString() {
@@ -22,6 +23,7 @@ public class Client {
                 + "\n\tfirstName = " + firstName
                 + ", lastName = " + lastName
                 + ", email = " + email
+                + ", location = " + location
                 + ", registration date = " + registrationDate.format(FORMATTER)
                 + ",\n\tpets = " + pets
                 + "\n}";
@@ -67,6 +69,14 @@ public class Client {
         this.email = email;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     public List<Pet> getPets() {
         return pets;
     }
@@ -77,5 +87,9 @@ public class Client {
 
     public void addPet(Pet pet) {
         pets.add(pet);
+    }
+
+    public enum Location {
+        KYIV, LVIV, TERNOPIL;
     }
 }

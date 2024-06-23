@@ -50,7 +50,9 @@ public class PetService {
                 "\nEnter 0 if health status is unknown: ");
         int healthStateValue = Main.SCANNER.nextInt();
         Pet.HealthState healthState = Pet.HealthState.fromValue(healthStateValue);
+
         Main.SCANNER.nextLine();
+
         if (healthState != null) {
             pet.setHealthState(healthState);
         } else {
