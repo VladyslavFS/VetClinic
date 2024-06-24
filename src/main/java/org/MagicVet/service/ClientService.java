@@ -55,8 +55,16 @@ public class ClientService {
         client.setLastName(lastName);
 
         System.out.println("Location: ");
-        String location = Main.SCANNER.nextLine();
-        client.setLocation(Client.Location.valueOf(location));
+        Client.Location location;
+        String locationInput = Main.SCANNER.nextLine();
+        try {
+            location = Client.Location.valueOf(locationInput);
+        } catch (IllegalArgumentException e) {
+            location = Client.Location.UNKNOWN;
+            System.out.println("Invalid location " + locationInput + ". Using default location: " + Client.Location.UNKNOWN);
+        }
+
+        client.setLocation(location);
 
         return  client;
     }

@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public abstract class Pet {
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
+    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
     private HealthState healthState;
     private String type;
     private String sex;
@@ -92,6 +92,10 @@ public abstract class Pet {
         this.ownerName = ownerName;
     }
 
+    public LocalDateTime getRegistrationDate() {
+        return registrationDate;
+    }
+
     public enum HealthState {
         HEALTHY(4), RECOVERING(3), INJURED(2), SICK(1), UNKNOWN(0);
 
@@ -111,7 +115,9 @@ public abstract class Pet {
                     return state;
                 }
             }
-            return null;
+
+            System.out.println("Invalid state " + value + ". Using default state: " + UNKNOWN);
+            return UNKNOWN;
         }
     }
 }

@@ -22,12 +22,13 @@ public class Dog extends Pet {
     @Override
     public String toString() {
         return "Dog {" +
-                "\n\t\ttype='" + super.getType() + '\'' +
-                ", sex='" + super.getSex() + '\'' +
-                ", age='" + super.getAge() + '\'' +
-                ", size='" + size + '\'' +
-                ", name='" + super.getName() + '\'' +
-                ", ownerName='" + super.getOwnerName() + '\'' +
+                "\n\t\ttype = " + super.getType() +
+                ", sex = " + super.getSex() +
+                ", age = " + super.getAge() +
+                ", size = " + size +
+                ", name = " + super.getName() +
+                ", ownerName = " + super.getOwnerName() +
+                ", registrationDate = " + super.getRegistrationDate().format(FORMATTER) +
                 "\n\t}";
     }
 
@@ -59,6 +60,17 @@ public class Dog extends Pet {
 
         Size(int value) {
             this.value = value;
+        }
+
+        public static Size fromValue(String value) {
+            for (Size size : Size.values()) {
+                if (Objects.equals(size.toString().toUpperCase(), value)) {
+                    return size;
+                }
+            }
+
+            System.out.println("Invalid size " + value + ". Using default value: " + UNKNOWN);
+            return UNKNOWN;
         }
 
         public int getValue() {
